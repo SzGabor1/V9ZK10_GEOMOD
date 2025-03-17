@@ -148,7 +148,6 @@ def draw_meteors(meteors):
         meteor_z = meteor["position"][1] * 1e-11
         glTranslatef(meteor_x, 0, meteor_z)
 
-        # Glowing Meteor Core
         glDisable(GL_TEXTURE_2D)
         glColor3f(1.0, 0.3, 0.0)  
         quad = gluNewQuadric()
@@ -163,8 +162,7 @@ def draw_meteors(meteors):
 def main():
     
     meteors = []
-# Generate a few random meteors
-    for _ in range(100):  # Adjust the number of meteors as needed
+    for _ in range(100):
         meteors.append(create_random_meteor())
     
     pygame.init()
