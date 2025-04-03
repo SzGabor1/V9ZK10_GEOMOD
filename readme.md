@@ -53,13 +53,13 @@ Ez a program egy 3D-s naprendszer szimulációt valósít meg, amelyben a Nap, a
 ## Követelmények
 - Python 3.8 vagy újabb
 - Telepített csomagok:
-  - [pygame](http://_vscodecontentref_/0)
+  - [pygame]
   - `PyOpenGL`
   - `Pillow`
 
 ## Fájlstruktúra
-- **[main.py](http://_vscodecontentref_/1)**: A program fő fájlja, amely tartalmazza a szimuláció logikáját.
-- **[textures](http://_vscodecontentref_/2)**: A bolygók és a Hold textúrái (pl. `sun.jpg`, `earth.jpg`, stb.).
+- [main.py]: A program fő fájlja, amely tartalmazza a szimuláció logikáját.
+- [textures]: A bolygók és a Hold textúrái (pl. `sun.jpg`, `earth.jpg`, stb.).
 
 ## Továbbfejlesztési lehetőségek
 - Több hold hozzáadása más bolygókhoz.
