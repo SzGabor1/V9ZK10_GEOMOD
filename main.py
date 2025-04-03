@@ -218,7 +218,6 @@ def main():
         update_positions_and_velocities()
         draw_planets(textures, angle)
 
-
         update_meteors(meteors)
         draw_meteors(meteors)
         pygame.display.flip()
