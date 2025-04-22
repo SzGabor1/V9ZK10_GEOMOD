@@ -1,69 +1,62 @@
-# Naprendszer szimuláció
+# Catmull-Rom Görbe és Forgási Felület Generátor
 
-## Leírás
-Ez a program egy 3D-s naprendszer szimulációt valósít meg, amelyben a Nap, a bolygók, a Hold és véletlenszerű meteoritok is megjelennek. A szimuláció OpenGL-t használ a grafikus megjelenítéshez, és a Pygame könyvtárat a felhasználói interakciók kezelésére.
+Ez a Python projekt egy **Catmull-Rom spline** alapú görbét generál, amelyet az Y-tengely körül forgatva 3D felületet hoz létre. Az alkalmazás interaktív grafikus felhasználói felülettel rendelkezik, amely lehetővé teszi a görbe és a felület paramétereinek testreszabását. A felület vizualizációja **PyVista** segítségével történik.
 
-## Funkciók
-- **Nap és bolygók**: A Nap és a bolygók forgása és keringése a valósághoz hasonlóan van szimulálva.
-- **Hold**: A Hold kering az Föld körül.
-- **Meteoritok**: Véletlenszerű meteoritok mozognak a naprendszerben.
-- **Kameravezérlés**: A felhasználó szabadon mozoghat a kamerával a szimuláció felfedezéséhez.
+## Fő Funkciók
 
-## Használati utasítás
-1. **Futtatás**:
-   - Győződj meg róla, hogy a Python telepítve van a gépeden.
-   - Telepítsd a szükséges csomagokat:
-     ```bash
-     pip install pygame PyOpenGL pillow
-     ```
-   - Futtasd a programot:
-     ```bash
-     python main.py
-     ```
-
-2. **Kameravezérlés**:
-   - **W**: Előre mozgás
-   - **S**: Hátra mozgás
-   - **A**: Balra mozgás
-   - **D**: Jobbra mozgás
-   - **Q**: Felfelé mozgás
-   - **E**: Lefelé mozgás
-   - Egér mozgatása: Kamera forgatása
-
-3. **Kilépés**:
-   - Nyomd meg az `ESC` billentyűt a kilépéshez.
-
-## Főbb jellemzők
-- **Nap**:
-  - A Nap a szimuláció középpontjában helyezkedik el, és fényforrásként működik.
-  - Teljesen megvilágított, hogy kiemelkedjen a szimulációban.
-
-- **Bolygók**:
-  - Minden bolygó saját textúrával, mérettel és forgási sebességgel rendelkezik.
-  - A bolygók a Nap körül keringenek.
-
-- **Hold**:
-  - A Hold az Föld körül kering, és saját textúrával rendelkezik.
-
-- **Meteoritok**:
-  - Véletlenszerűen generált meteoritok mozognak a naprendszerben.
-  - A meteoritok tüzes hatással jelennek meg. (Ezek valójában inkább csillagoknak néznek ki)
-
+- **Catmull-Rom spline generálás**: Sima, folytonos görbék generálása megadott vezérlőpontok alapján.
+- **Forgási felület létrehozása**: A görbét az Y-tengely körül forgatva 3D felületet hoz létre.
+- **Matematikai elemzés**: Ívhossz, felszín és térfogat számítása, valamint görbület megjelenítése.
+- **Interaktív vizualizáció**: A görbe és a felület megjelenítése PyVista segítségével, színezés görbület alapján.
+- **Felhasználói felület**: Egyszerű Tkinter-alapú GUI, amely lehetővé teszi a spline felbontásának és a forgási szögek számának beállítását.
 
 ## Követelmények
-- Python 3.8 vagy újabb
-- Telepített csomagok:
-  - `pygame`
-  - `PyOpenGL`
-  - `Pillow`
 
-## Fájlstruktúra
-- `main.py` A program fő fájlja, amely tartalmazza a szimuláció logikáját.
-- `textures` A bolygók és a Hold textúrái (pl. `sun.jpg`, `earth.jpg`, stb.).
+A projekt futtatásához a következő csomagok szükségesek:
 
-## Továbbfejlesztési lehetőségek
-- Több hold hozzáadása más bolygókhoz.
-- Felhasználói interfész a szimuláció vezérléséhez.
+```bash
+pip install numpy pyvista tkinter
+```
 
-## Készítette
-Ez a program egy oktatási célú projekt, amely a 3D grafika és a fizikai szimuláció alapjait mutatja be Pythonban.
+## Használati Útmutató
+
+### 1. Vezérlőpontok Megadása
+A vezérlőpontokat a `control_points` változóban adhatod meg a kódban. Példa:
+
+```python
+control_points = np.array([
+    [0, 0],
+    [1, 2],
+    [2, 3],
+    [3, 5],
+    [4, 4],
+    [5, 2]
+])
+```
+
+### 2. Paraméterek Beállítása
+Az alkalmazás indítása után a következő paramétereket állíthatod be a grafikus felületen:
+- **Spline felbontás (pontok száma)**: A görbe generálásához használt interpolációs pontok száma.
+- **Forgási felbontás (szögek száma)**: A forgási felület generálásához használt szögfelbontás.
+
+### 3. Görbe és Felület Generálása
+Kattints a **"Generate"** gombra a görbe és a forgási felület generálásához és megjelenítéséhez.
+
+## Matematikai Háttér
+
+### Catmull-Rom spline
+A Catmull-Rom spline egy interpolációs görbe, amely a megadott vezérlőpontokon halad át. A görbe folytonos és differenciálható, így ideális interpolációs feladatokhoz.
+
+### Forgási Felület
+A görbét az Y-tengely körül forgatva egy 3D felületet hozunk létre. A forgási felület pontjai a következőképpen számíthatók:
+- Egy adott szögben a görbe minden pontját elforgatjuk az Y-tengely körül.
+
+### Felszín és Térfogat Számítása
+- **Felszín**: A görbe mentén numerikus integrációval számítjuk ki a forgási felület felszínét.
+  \[
+  A = 2 \pi \int y \, ds
+  \]
+- **Térfogat**: A forgási felület térfogata szintén numerikus integrációval számítható.
+  \[
+  V = \pi \int y^2 \, ds
+  \]
